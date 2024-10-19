@@ -422,9 +422,12 @@ def extract_relevance(seq_nodes: List[ConceptNode],
     focal_embedding = embeddings.get(focal_pt)
 
     if focal_embedding is None:
-        print(f"Warning: No embedding found for focal point: {focal_pt}. Using fallback embedding.")
-        # Use a zero vector as a fallback embedding
-        focal_embedding = [0] * len(next(iter(embeddings.values())))
+        print(f"Warning: No embedding found for focal point: {focal_pt}. Attempting to generate embedding.")
+        # Try to generate embedding using get_text_embedding function
+        focal_embedding = get_text_embedding(focal_pt)
+        if focal_embedding is None:
+            print(f"Warning: Unable to generate embedding for focal point: {focal_pt}. Using zero vector fallback.")
+            focal_embedding = [0] * len(next(iter(embeddings.values())))  # Fallback to a zero vector
 
     # Initialize an empty dictionary to store relevance scores
     relevance_scores = {}
@@ -435,10 +438,15 @@ def extract_relevance(seq_nodes: List[ConceptNode],
         if node_embedding:
             relevance_scores[node.node_id] = cos_sim(node_embedding, focal_embedding)
         else:
-            print(f"Warning: No embedding found for node content: {node.content}. Skipping this node.")
+            print(f"Warning: No embedding found for node content: {node.content}. Attempting to generate embedding.")
+            # Try to generate embedding for the node content if missing
+            node_embedding = get_text_embedding(node.content)
+            if node_embedding:
+                relevance_scores[node.node_id] = cos_sim(node_embedding, focal_embedding)
+            else:
+                print(f"Warning: Unable to generate embedding for node content: {node.content}. Skipping this node.")
 
     return relevance_scores
-
 
 
 

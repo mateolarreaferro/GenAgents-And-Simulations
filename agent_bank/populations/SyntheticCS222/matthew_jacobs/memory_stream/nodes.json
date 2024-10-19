@@ -3,7 +3,7 @@
     "node_id": 0,
     "node_type": "observation",
     "content": "Grew up in a rural town in Texas, learning to hunt and fish with his father from an early age.",
-    "importance": 55,
+    "importance": 45,
     "created": 0,
     "last_retrieved": 0,
     "pointer_id": null
@@ -39,7 +39,7 @@
     "node_id": 4,
     "node_type": "observation",
     "content": "Married his college girlfriend, beginning a 12-year marriage that would later end in divorce.",
-    "importance": 50,
+    "importance": 45,
     "created": 0,
     "last_retrieved": 0,
     "pointer_id": null
@@ -66,7 +66,7 @@
     "node_id": 7,
     "node_type": "observation",
     "content": "Joined a local libertarian group, strengthening his political beliefs in small government and financial independence.",
-    "importance": 65,
+    "importance": 75,
     "created": 0,
     "last_retrieved": 0,
     "pointer_id": null
@@ -84,7 +84,7 @@
     "node_id": 9,
     "node_type": "observation",
     "content": "Went through a challenging divorce, learning to co-parent his daughter with his ex-wife.",
-    "importance": 85,
+    "importance": 75,
     "created": 0,
     "last_retrieved": 0,
     "pointer_id": null
@@ -156,7 +156,7 @@
     "node_id": 17,
     "node_type": "observation",
     "content": "Began seeing his daughter less often as she grew older, leading to feelings of guilt about missing time with her.",
-    "importance": 78,
+    "importance": 75,
     "created": 0,
     "last_retrieved": 0,
     "pointer_id": null
@@ -165,7 +165,7 @@
     "node_id": 18,
     "node_type": "observation",
     "content": "Wrote multiple letters to local newspapers about the importance of reducing government regulation on small businesses.",
-    "importance": 70,
+    "importance": 65,
     "created": 0,
     "last_retrieved": 0,
     "pointer_id": null
@@ -183,7 +183,7 @@
     "node_id": 20,
     "node_type": "observation",
     "content": "Went to the grocery store to pick up supplies for the week.",
-    "importance": 25,
+    "importance": 30,
     "created": 0,
     "last_retrieved": 0,
     "pointer_id": null
@@ -192,7 +192,7 @@
     "node_id": 21,
     "node_type": "observation",
     "content": "Filled up his truck with gas at the local station.",
-    "importance": 15,
+    "importance": 20,
     "created": 0,
     "last_retrieved": 0,
     "pointer_id": null
@@ -228,7 +228,7 @@
     "node_id": 25,
     "node_type": "observation",
     "content": "Received a phone call from a client about a small house listing.",
-    "importance": 45,
+    "importance": 40,
     "created": 0,
     "last_retrieved": 0,
     "pointer_id": null
@@ -237,7 +237,7 @@
     "node_id": 26,
     "node_type": "observation",
     "content": "Ran into an old college friend at the hardware store.",
-    "importance": 15,
+    "importance": 25,
     "created": 0,
     "last_retrieved": 0,
     "pointer_id": null
@@ -246,7 +246,7 @@
     "node_id": 27,
     "node_type": "observation",
     "content": "Went to a local diner for breakfast and read the morning paper.",
-    "importance": 15,
+    "importance": 10,
     "created": 0,
     "last_retrieved": 0,
     "pointer_id": null
@@ -291,7 +291,7 @@
     "node_id": 32,
     "node_type": "observation",
     "content": "Renewed his real estate license online during a quiet workday.",
-    "importance": 45,
+    "importance": 40,
     "created": 0,
     "last_retrieved": 0,
     "pointer_id": null
@@ -345,7 +345,7 @@
     "node_id": 38,
     "node_type": "observation",
     "content": "Picked up his daughter from school for the weekend and grabbed ice cream on the way home.",
-    "importance": 30,
+    "importance": 25,
     "created": 0,
     "last_retrieved": 0,
     "pointer_id": null
@@ -372,7 +372,7 @@
     "node_id": 41,
     "node_type": "observation",
     "content": "Watched a documentary about historical land ownership with mild interest.",
-    "importance": 25,
+    "importance": 30,
     "created": 0,
     "last_retrieved": 0,
     "pointer_id": null
@@ -381,7 +381,7 @@
     "node_id": 42,
     "node_type": "observation",
     "content": "Helped a friend move some furniture into their new apartment.",
-    "importance": 25,
+    "importance": 30,
     "created": 0,
     "last_retrieved": 0,
     "pointer_id": null
@@ -399,7 +399,7 @@
     "node_id": 44,
     "node_type": "observation",
     "content": "Read a book about business management during a slow workday.",
-    "importance": 45,
+    "importance": 65,
     "created": 0,
     "last_retrieved": 0,
     "pointer_id": null
@@ -426,7 +426,7 @@
     "node_id": 47,
     "node_type": "observation",
     "content": "Went to the local farmer\u2019s market to pick up fresh vegetables for dinner.",
-    "importance": 60,
+    "importance": 30,
     "created": 0,
     "last_retrieved": 0,
     "pointer_id": null
@@ -444,7 +444,7 @@
     "node_id": 49,
     "node_type": "observation",
     "content": "Answered a telemarketer\u2019s call offering insurance and politely declined.",
-    "importance": 15,
+    "importance": 25,
     "created": 0,
     "last_retrieved": 0,
     "pointer_id": null
@@ -453,7 +453,7 @@
     "node_id": 50,
     "node_type": "observation",
     "content": "Attended a friend\u2019s birthday party and had a few drinks while chatting.",
-    "importance": 15,
+    "importance": 20,
     "created": 0,
     "last_retrieved": 0,
     "pointer_id": null
@@ -462,7 +462,7 @@
     "node_id": 51,
     "node_type": "observation",
     "content": "Cleaned out his garage and found some old fishing gear he hadn\u2019t used in years.",
-    "importance": 30,
+    "importance": 25,
     "created": 0,
     "last_retrieved": 0,
     "pointer_id": null
@@ -480,7 +480,7 @@
     "node_id": 53,
     "node_type": "observation",
     "content": "Talked to his neighbor about the growing cost of living in Austin.",
-    "importance": 75,
+    "importance": 70,
     "created": 0,
     "last_retrieved": 0,
     "pointer_id": null
@@ -525,7 +525,7 @@
     "node_id": 58,
     "node_type": "observation",
     "content": "Ordered a pizza for dinner after a long day at work.",
-    "importance": 30,
+    "importance": 20,
     "created": 0,
     "last_retrieved": 0,
     "pointer_id": null
@@ -534,7 +534,7 @@
     "node_id": 59,
     "node_type": "observation",
     "content": "Scrolled through social media while waiting for a client to arrive.",
-    "importance": 15,
+    "importance": 25,
     "created": 0,
     "last_retrieved": 0,
     "pointer_id": null
@@ -561,7 +561,7 @@
     "node_id": 62,
     "node_type": "observation",
     "content": "Met with a potential buyer to show a commercial property in downtown Austin.",
-    "importance": 85,
+    "importance": 75,
     "created": 0,
     "last_retrieved": 0,
     "pointer_id": null
@@ -651,7 +651,7 @@
     "node_id": 72,
     "node_type": "observation",
     "content": "Gave a tour of a home to a family relocating from another state.",
-    "importance": 70,
+    "importance": 75,
     "created": 0,
     "last_retrieved": 0,
     "pointer_id": null
@@ -669,7 +669,7 @@
     "node_id": 74,
     "node_type": "observation",
     "content": "Dealt with zoning issues while helping a client buy land for a new construction project.",
-    "importance": 85,
+    "importance": 75,
     "created": 0,
     "last_retrieved": 0,
     "pointer_id": null
