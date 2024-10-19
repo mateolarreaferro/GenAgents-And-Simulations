@@ -16,10 +16,10 @@ def test_openai_api():
 
         # Make a test API call using the ChatCompletion endpoint (adjust model if necessary)
         response = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo",  # Or use the model you're working with
+            model="gpt-4",  # Or use the model you're working with
             messages=[
                 {"role": "system", "content": "You are a helpful assistant."},
-                {"role": "user", "content": "Say hello to the world!"}
+                {"role": "user", "content": "What is the capital of the United States?"},
             ]
         )
 
