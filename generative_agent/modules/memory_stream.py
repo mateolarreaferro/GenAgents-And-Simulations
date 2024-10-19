@@ -333,122 +333,107 @@ class MemoryStream:
 # ##############################################################################
 
 def extract_recency(seq_nodes: List[ConceptNode]) -> Dict[int, float]:
-  """
-  Calculate the recency score for each node in the given sequence of 
-  ConceptNodes.
+    """
+    Calculate the recency score for each node in the given sequence of 
+    ConceptNodes.
 
-  This function assigns a recency score to each node based on how recently it 
-  was accessed. The score is calculated using an exponential decay function, 
-  where more recently accessed nodes receive higher scores.
+    This function assigns a recency score to each node based on how recently it 
+    was accessed. The score is calculated using an exponential decay function, 
+    where more recently accessed nodes receive higher scores.
 
-  Input:
-      seq_nodes: A list of ConceptNode objects, each representing a memory or 
-        concept. Each node should have 'node_id' and 'last_retrieved' 
-        attributes.
+    Input:
+        seq_nodes: A list of ConceptNode objects, each representing a memory or 
+          concept. Each node should have 'node_id' and 'last_retrieved' 
+          attributes.
 
-  Output:
-      A dictionary where:
-      - Keys are node IDs (integers)
-      - Values are recency scores (floats between 0 and 1)
+    Output:
+        A dictionary where:
+        - Keys are node IDs (integers)
+        - Values are recency scores (floats between 0 and 1)
 
-  Algorithm:
-  1. Find the most recent timestamp among all nodes.
-  2. For each node, calculate its recency score as:
-     score = recency_decay ^ (max_timestep - node's last retrieval time)
-  3. A recency_decay of 0.99 is used, meaning the score halves approximately 
-     every 69 time steps.
+    Note:
+    - More recent nodes will have higher scores.
+    """
+    # Initialize an empty dictionary to store recency scores
+    recency_scores = {}
 
-  Note:
-  - More recent nodes (those with last_retrieved closer to max_timestep) will 
-    have higher scores.
-  - The most recently accessed node(s) will always have a score of 1.
-  - Scores decrease exponentially for older memories.
-  """
-  # Complete the function below. 
-  # [TODO]
+    # Find the maximum timestamp in the sequence of nodes
+    max_time_step = max(node.last_retrieved for node in seq_nodes)
 
-  return dict()
+    # Loop through each node to calculate the recency score
+    for node in seq_nodes:
+        # Recency decay factor (e.g., 0.99)
+        recency_decay = 0.99
+        time_diff = max_time_step - node.last_retrieved
+        # Calculate the recency score using exponential decay
+        recency_scores[node.node_id] = recency_decay ** time_diff
+
+    return recency_scores
 
 
 def extract_importance(seq_nodes: List[ConceptNode]) -> Dict[int, float]:
-  """
-  Extract the importance score for each node in the given sequence of 
-  ConceptNodes.
+    """
+    Extract the importance score for each node in the given sequence of 
+    ConceptNodes.
 
-  This function creates a mapping of node IDs to their importance scores. The 
-  importance score is a pre-existing attribute of each node, representing the 
-  significance or relevance of the memory or concept.
+    Input:
+        seq_nodes: A list of ConceptNode objects, each representing a memory or 
+          concept. Each node should have 'node_id' and 'importance' attributes.
 
-  Input:
-      seq_nodes: A list of ConceptNode objects, each representing a memory or 
-        concept. Each node should have 'node_id' and 'importance' attributes.
+    Output:
+        A dictionary where:
+        - Keys are node IDs (integers)
+        - Values are importance scores (floats)
+    """
+    # Initialize an empty dictionary to store importance scores
+    importance_scores = {}
 
-  Output:
-      A dictionary where:
-      - Keys are node IDs (integers)
-      - Values are importance scores (floats)
+    # Loop through each node to extract the importance score
+    for node in seq_nodes:
+        importance_scores[node.node_id] = node.importance
 
-  Algorithm:
-  1. Iterate through each node in the input list.
-  2. Extract the importance score from each node.
-  3. Create a dictionary mapping each node's ID to its importance score.
+    return importance_scores
 
-  Note:
-  - The function assumes that the importance scores are already calculated and 
-    stored in each node. It does not compute or modify these scores.
-  - The range and scale of importance scores depend on how they were originally 
-    assigned to the nodes.
-  """
-  # Complete the function below. 
-  # [TODO]
-
-  return dict()
 
 
 def extract_relevance(seq_nodes: List[ConceptNode], 
                       embeddings: Dict[str, List[float]], 
                       focal_pt: str) -> Dict[int, float]:
-  """
-  Calculate the relevance score of each node to a given focal point.
+    """
+    Calculate the relevance score of each node to a given focal point.
 
-  This function computes how relevant each node (memory or concept) is to a 
-  specific focal point (e.g., a current thought or query). It uses cosine 
-  similarity between the embedding of the focal point and the embedding of 
-  each node's content.
+    This function computes how relevant each node (memory or concept) is to a 
+    specific focal point using cosine similarity between the node's embedding 
+    and the focal point's embedding.
 
-  Inputs:
-      seq_nodes: A list of ConceptNode objects, each representing a memory or 
-        concept. Each node should have 'node_id' and 'content' attributes.
-      embeddings: A dictionary mapping content strings to their vector 
-        embeddings.
-      focal_pt: A string representing the current focus or query.
+    Inputs:
+        seq_nodes: A list of ConceptNode objects, each representing a memory or 
+          concept. Each node should have 'node_id' and 'content' attributes.
+        embeddings: A dictionary mapping content strings to their vector 
+          embeddings.
+        focal_pt: A string representing the current focus or query.
 
-  Output:
-      A dictionary where:
-      - Keys are node IDs (integers)
-      - Values are relevance scores (floats between -1 and 1, where 1 is most 
-        relevant)
+    Output:
+        A dictionary where:
+        - Keys are node IDs (integers)
+        - Values are relevance scores (floats between -1 and 1)
+    """
+    # Get the embedding for the focal point
+    focal_embedding = embeddings.get(focal_pt)
+    if focal_embedding is None:
+        raise ValueError(f"No embedding found for focal point: {focal_pt}")
 
-  Algorithm:
-  1. Get the embedding for the focal point.
-  2. For each node:
-     a. Retrieve the embedding for the node's content.
-     b. Calculate the cosine similarity between the node's embedding and the 
-        focal point's embedding.
-  3. Return a dictionary of node IDs mapped to their relevance scores.
+    # Initialize an empty dictionary to store relevance scores
+    relevance_scores = {}
 
-  Note:
-  - Cosine similarity is used as the relevance metric. It ranges from -1 
-    (opposite) to 1 (identical).
-  - The function assumes that embeddings exist for both the focal point and 
-    all node contents.
-  - The quality of relevance scoring depends on the quality of the embedding 
-    model used.
-  """
-  # Complete the function below. 
-  # [TODO]
+    # Loop through each node to calculate the cosine similarity
+    for node in seq_nodes:
+        node_embedding = embeddings.get(node.content)
+        if node_embedding:
+            relevance_scores[node.node_id] = cos_sim(node_embedding, focal_embedding)
 
-  return dict()
+    return relevance_scores
+
 
 
 # ##############################################################################
