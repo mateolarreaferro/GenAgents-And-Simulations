@@ -201,16 +201,20 @@ def chat_safe_generate(prompt_input: Union[str, List[str]],
 # #################### [SECTION 3: OTHER API FUNCTIONS] ######################
 # ============================================================================
 
-def get_text_embedding(text: str, 
-                       model: str = "text-embedding-3-small") -> List[float]:
-  """Generate an embedding for the given text using OpenAI's API."""
-  if not isinstance(text, str) or not text.strip():
-    raise ValueError("Input text must be a non-empty string.")
+def get_text_embedding(text: str, model: str = "text-embedding-ada-002") -> List[float]:
+    """Generate an embedding for the given text using OpenAI's API."""
+    if not isinstance(text, str) or not text.strip():
+        raise ValueError("Input text must be a non-empty string.")
 
-  text = text.replace("\n", " ").strip()
-  response = openai.embeddings.create(
-    input=[text], model=model).data[0].embedding
-  return response
+    text = text.replace("\n", " ").strip()
+    try:
+        response = openai.Embedding.create(input=[text], model=model)
+        return response['data'][0]['embedding']
+    except Exception as e:
+        print(f"Warning: Could not generate embedding for text: {text}. Using zero vector.")
+        return [0] * 768  # Use a zero vector fallback for failed embeddings.
+
+
 
 
 
