@@ -6,46 +6,39 @@ from simulation_engine.llm_json_parser import *
 
 
 def _utterance_agent_desc(agent: 'GenerativeAgent', anchor: str) -> str: 
-  """
-  Generate a description of the agent based on its attributes and relevant 
-  memories.
+    """
+    Generate a description of the agent based on its attributes and relevant memories.
 
-  This function creates a string description of the agent, including its 
-  self-description, speech pattern, and relevant memories retrieved based on 
-  the given anchor.
+    This function creates a string description of the agent, including its 
+    self-description, speech pattern, and relevant memories retrieved based 
+    on the given anchor.
 
-  Steps:
-  1. Initialize the agent description string
-  2. Add the agent's self-description
-  3. Add the agent's speech pattern
-  4. Retrieve relevant memories using the anchor
-  5. Add the content of retrieved memories to the description
+    :param agent: The GenerativeAgent instance
+    :param anchor: A string used to retrieve relevant memories
+    :return: A string containing the agent's description and relevant memories
+    """
+    # Step 1: Initialize the agent description string
+    agent_desc = f"{agent.scratch.self_description}\n\n"
 
-  :param agent: The GenerativeAgent instance
-  :param anchor: A string used to retrieve relevant memories
-  :return: A string containing the agent's description and relevant memories
-  """
-  # Step 1: Initialize the agent description string
-  agent_desc = ""
+    # Step 2: Add the agent's speech pattern to the description
+    agent_desc += f"Speech Pattern:\n{agent.scratch.speech_pattern}\n\n"
 
-  # [TODO]
+    # Step 3: Retrieve relevant memories based on the anchor
+    retrieved_memories = agent.memory_stream.retrieve(
+        focal_points=[anchor], 
+        time_step=0,  # Assuming we don't need a specific time step for this
+        n_count=10, 
+        curr_filter="all", 
+        verbose=DEBUG
+    )
 
-  # Step 2: Add the agent's self-description
-  # TODO: Add the self-description to agent_desc
-  # Hint: Use agent.scratch.self_description
+    # Step 4: Add the content of the retrieved memories to the description
+    if retrieved_memories and anchor in retrieved_memories:
+        memories_content = [node.content for node in retrieved_memories[anchor]]
+        agent_desc += f"Relevant Memories:\n" + "\n".join(memories_content)
 
-  # Step 3: Add the agent's speech pattern
-  # TODO: Add the speech pattern to agent_desc
-  # Hint: Use agent.scratch.speech_pattern
+    return agent_desc
 
-  # Step 4: Retrieve relevant memories using the anchor
-  # TODO: Use agent.memory_stream.retrieve to get relevant memories
-  # Hint: Set n_count=10 and verbose=DEBUG
-
-  # Step 5: Add the content of retrieved memories to the description
-  # TODO: Iterate through the retrieved nodes and add their content to agent_desc
-
-  return agent_desc
 
 
 def run_gpt_generate_utterance(
@@ -75,7 +68,11 @@ def run_gpt_generate_utterance(
     return [agent_desc, context, str_dialogue]
 
   def _func_clean_up(gpt_response: str, prompt: str = "") -> str:
-    return extract_first_json_dict(gpt_response)["utterance"]
+        print(f"GPT Response: {gpt_response}")  # Print the GPT response
+        if gpt_response:
+            return extract_first_json_dict(gpt_response).get("utterance", "No response generated.")
+        else:
+            return "Error: No response from GPT."
 
   def _get_fail_safe() -> None:
     return None

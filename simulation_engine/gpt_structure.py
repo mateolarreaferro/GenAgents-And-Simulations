@@ -66,30 +66,38 @@ def extract_text_from_pdf_file(file_path: str) -> str:
 def gpt_request(prompt: str, 
                 model: str = "gpt-4o", 
                 max_tokens: int = 1500) -> str:
-  """Make a request to OpenAI's GPT model."""
-  if model == "o1-preview": 
-    try:
-      client = openai.OpenAI(api_key=OPENAI_API_KEY)
-      response = client.chat.completions.create(
-        model=model,
-        messages=[{"role": "user", "content": prompt}]
-      )
-      return response.choices[0].message.content
-    except Exception as e:
-      return f"GENERATION ERROR: {str(e)}"
+    """Make a request to OpenAI's GPT model."""
+    
+    # Case for "o1-preview" model
+    if model == "o1-preview": 
+        try:
+            response = openai.ChatCompletion.create(
+                model=model,
+                messages=[{"role": "user", "content": prompt}],
+                max_tokens=max_tokens,
+                temperature=0.7
+            )
+            return response.choices[0].message['content']
+        except Exception as e:
+            return f"GENERATION ERROR: {str(e)}"
 
-  try:
-    client = openai.OpenAI(api_key=OPENAI_API_KEY)
-    response = client.chat.completions.create(
-      model=model,
-      messages=[{"role": "user", "content": prompt}],
-      max_tokens=max_tokens,
-      temperature=0.7
-    )
-    return response.choices[0].message.content
-  except Exception as e:
-    return f"GENERATION ERROR: {str(e)}"
-  
+    # General case for other models
+    try:
+        # Set the API key globally
+        openai.api_key = OPENAI_API_KEY
+        
+        response = openai.ChatCompletion.create(
+            model=model,
+            messages=[{"role": "user", "content": prompt}],
+            max_tokens=max_tokens,
+            temperature=0.7
+        )
+        
+        # Return the content of the first message in the response
+        return response.choices[0].message['content']
+        
+    except Exception as e:
+        return f"GENERATION ERROR: {str(e)}"
 
 def gpt_request_messages(messages: List[dict],
                 model: str = "gpt-4o", 
