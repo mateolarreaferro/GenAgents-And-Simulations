@@ -1,4 +1,17 @@
-Name: 
-SU ID: 
+Name: Mateo Larrea
+SU ID: 06761787
+
+Questions:
+
+Was it retrieving the right information?
+Yes, the retrieval function accurately retrieves semantically relevant information by comparing vector embeddings and applying GPT-generated importance scores to rank memories.
+
+What distinguishes the memories that are considered "important" versus not?
+In the current implementation, important memories are distinguished based on their conceptual relevance to the query and GPT-assigned importance scores that factor in the significance of the memory.
 
 Response:
+The retrieval function effectively retrieves relevant memories by leveraging both cosine similarity between vector embeddings and GPT-generated importance scores. Cosine similarity measures how aligned the query is with each memory’s embedding, ensuring that semantically related memories are ranked higher. Meanwhile, GPT assigns an importance score that reflects the significance and overall impact of each memory, allowing the system to prioritize memories that are not just conceptually related but also meaningful in context.
+
+Memories are distinguished by two key factors: conceptual relevance and importance, with the latter being scored by GPT based on multiple dimensions, such as emotional significance, life impact, and contextual relevance. For instance, GPT’s scoring can elevate major life events—such as starting a business or overcoming a personal challenge—above routine activities, even if both memories are relevant to the query. While the system excels in capturing both aspects, the current implementation could be enhanced by refining how personal importance is weighted to further prioritize memories with higher emotional or life significance.
+
+To improve memory retrieval, introducing a more explicit weighting system to fine-tune how importance scores are applied alongside conceptual relevance could be beneficial. This would ensure that emotionally charged, high-impact memories are consistently prioritized, leading to more nuanced and meaningful memory retrieval, especially for complex or personal queries.
